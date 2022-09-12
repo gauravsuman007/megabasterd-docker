@@ -1,0 +1,9 @@
+version: '3'
+services:
+  megabasterd:
+    image: gauravsuman007/megabasterd
+    ports:
+      - "6800:5800"
+    volumes:
+      - "./config:/config:rw"
+      - "./output:/output:rw"
