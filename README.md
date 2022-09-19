@@ -29,7 +29,9 @@ The web UI can be accessed at port `5800`.
 On the first run, go to the top menu "Edit" -> "Settings", here you should configure the following items:
 - Download folder to to point it to /output
 <img width="755" alt="image" src="https://user-images.githubusercontent.com/16671262/191015820-803abd22-6aa3-4c6f-aaa0-85204fd065a4.png">
+
 - MEGA API key (Under Advanced)
 <img width="758" alt="image" src="https://user-images.githubusercontent.com/16671262/191016225-c36cb218-9b70-4e5d-afb8-fafd707fa239.png">
+
 - (Optional) Use Smartproxy.
 
