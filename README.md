@@ -27,7 +27,7 @@ Alternatively, you can always clone the repo and build your own image using the 
 ### Step 2: Accessing the app and configuring it
 The web UI can be accessed at port `5800`.
 On the first run, go to the top menu "Edit" -> "Settings", here you should configure the following items:
-- Download folder to to point it to /output
+- Download folder to point it to /output
 <img width="755" alt="image" src="https://user-images.githubusercontent.com/16671262/191015820-803abd22-6aa3-4c6f-aaa0-85204fd065a4.png">
 
 - MEGA API key (Under Advanced)
@@ -35,3 +35,5 @@ On the first run, go to the top menu "Edit" -> "Settings", here you should confi
 
 - (Optional) Use Smartproxy.
 
+## Downloading
+The copy paste doesn't work as you would expect in the GUI. To paste a mega link, you first need to open the app clipboard from the top bar and paste your links there. Then you can go to "File" -> "New download" and the links pasted in the clipboard will be accessed automatically.
