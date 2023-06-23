@@ -2,7 +2,7 @@
 FROM jlesage/baseimage-gui:debian-10
 
 # Define software download URLs.
-ARG DOWNLOAD_URL=https://github.com/tonikelope/megabasterd/releases/download/v7.55/MegaBasterdLINUX_7.55_portable.zip
+ARG DOWNLOAD_URL=https://github.com/tonikelope/megabasterd/releases/download/v7.74/MegaBasterdLINUX_7.74_portable.zip
 
 #Download Megabasterd
 RUN \
