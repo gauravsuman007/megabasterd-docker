@@ -1,7 +1,7 @@
 #
-# jdownloader-2 Dockerfile
+# megabasterd Dockerfile
 #
-# https://github.com/jlesage/docker-jdownloader-2
+#https://github.com/gauravsuman007/megabasterd-docker.git
 #
 # NOTES:
 #   - We are using JRE version 8 because recent versions are much bigger.
@@ -17,15 +17,24 @@
 ARG DOCKER_IMAGE_VERSION=
 
 # Define software download URLs.
-ARG JDOWNLOADER_URL=http://installer.jdownloader.org/JDownloader.jar
+ARG VERSION=7.76
+ARG DOWNLOAD_URL=https://github.com/tonikelope/megabasterd/releases/download/v${VERSION}/MegaBasterdLINUX_${VERSION}_portable.zip
 
-# Download JDownloader2
-FROM --platform=$BUILDPLATFORM alpine:3.16 AS jd2
-ARG JDOWNLOADER_URL
+# Download MegaBasterd
+FROM --platform=$BUILDPLATFORM alpine:3.16 AS alp
+ARG DOWNLOAD_URL
 RUN \
-    apk --no-cache add curl && \
+    apk --no-cache add curl unzip && \
     mkdir -p /defaults && \
-    curl -# -L -o /defaults/JDownloader.jar ${JDOWNLOADER_URL}
+    cd /defaults && \
+#    curl -# -L -o /defaults/MegaBasterd.jar ${DOWNLOAD_URL}
+    curl -# -L -o /defaults/MegaBasterd.zip ${DOWNLOAD_URL} && \
+    unzip -q MegaBasterd.zip && \
+    mv MegaBasterdLINUX/ MegaBasterd && \
+    rm -rf MegaBasterd/jre && \
+    # Cleanup.
+    apk del unzip curl && \
+    rm -rf MegaBasterd.zip /tmp/* /tmp/.[!.]*
 
 # Pull base image.
 FROM jlesage/baseimage-gui:alpine-3.16-v4.4.2
@@ -45,7 +54,7 @@ RUN \
         # We need a font.
         ttf-dejavu \
         # For ffmpeg and ffprobe tools.
-        ffmpeg \
+        #ffmpeg \
         # For rtmpdump tool.
         rtmpdump \
         # Need for the sponge tool.
@@ -53,30 +62,26 @@ RUN \
 
 # Generate and install favicons.
 RUN \
-    APP_ICON_URL=https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/jdownloader-2-icon.png && \
+    APP_ICON_URL=https://cdn-icons-png.flaticon.com/256/873/873133.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Add files.
 COPY rootfs/ /
-COPY --from=jd2 /defaults/JDownloader.jar /defaults/JDownloader.jar
+COPY --from=alp /defaults/MegaBasterd /defaults/MegaBasterd
 
 # Set internal environment variables.
 RUN \
-    set-cont-env APP_NAME "JDownloader 2" && \
+    set-cont-env APP_NAME "MegaBasterd" && \
     set-cont-env DOCKER_IMAGE_VERSION "$DOCKER_IMAGE_VERSION" && \
     true
 
 # Define mountable directories.
 VOLUME ["/output"]
 
-# Expose ports.
-#   - 3129: For MyJDownloader in Direct Connection mode.
-EXPOSE 3129
-
 # Metadata.
 LABEL \
-      org.label-schema.name="jdownloader-2" \
-      org.label-schema.description="Docker container for JDownloader 2" \
+      org.label-schema.name="MegaBasterd" \
+      org.label-schema.description="Docker container for MegaBasterd" \
       org.label-schema.version="${DOCKER_IMAGE_VERSION:-unknown}" \
-      org.label-schema.vcs-url="https://github.com/jlesage/docker-jdownloader-2" \
+      org.label-schema.vcs-url="https://github.com/gauravsuman007/megabasterd-docker.git" \
       org.label-schema.schema-version="1.0"
