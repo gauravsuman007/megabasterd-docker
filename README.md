@@ -37,3 +37,6 @@ On the first run, go to the top menu "Edit" -> "Settings", here you should confi
 
 ## Downloading
 The copy paste doesn't work as you would expect in the GUI. To paste a mega link, you first need to open the app clipboard from the top bar and paste your links there. Then you can go to "File" -> "New download" and the links pasted in the clipboard will be accessed automatically.
+
+## Updating the megabasterd app
+Since Megabasterd updates very frequently I don't plan to provide a lot of updates unless there are breaking changes or I find the time to push out a new update. To manually upüdate to the latest Megabasterd release, download the latest Linux version of their java package, unzip it and copy the MegaBasterd.jar from the jar folder to /config/MegaBasterd/jar/ (replacing the existing file). Restart the container and the new version should be loaded!
